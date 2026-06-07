@@ -1,53 +1,43 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>XcTxTeaM EeMoT | راقص فري فاير</title>
+    <title>XcTxTeaM EeMoT | Free Fire Emote Sender</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             background: radial-gradient(circle at 20% 30%, #0a0a0a, #000000);
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
             color: #f0f0f0;
             min-height: 100vh;
             padding: 20px;
-            direction: rtl;
         }
-
-        /* كونتينر رئيسي */
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-
-        /* هيدر أنيق */
         .header {
             text-align: center;
             margin-bottom: 30px;
-            position: relative;
         }
         .header h1 {
             font-size: 2.6rem;
             background: linear-gradient(135deg, #ffffff, #aa2e2e);
-            -webkit-background-clip: text;
             background-clip: text;
+            -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -1px;
-            text-shadow: 0 0 10px rgba(170, 46, 46, 0.3);
         }
         .header p {
             color: #bbb;
             margin-top: 8px;
             font-size: 0.9rem;
         }
-
-        /* بطاقة الإدخال */
         .input-card {
             background: rgba(15, 15, 15, 0.8);
             backdrop-filter: blur(12px);
@@ -57,7 +47,6 @@
             border: 1px solid rgba(200, 50, 50, 0.3);
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
-
         .field-group {
             display: flex;
             flex-wrap: wrap;
@@ -77,7 +66,7 @@
             color: #cc5555;
             margin-bottom: 8px;
         }
-        .field input, .uid-input {
+        .field input {
             width: 100%;
             background: #1a1a1a;
             border: 1px solid #3a2a2a;
@@ -87,14 +76,12 @@
             font-size: 1rem;
             transition: all 0.2s ease;
         }
-        .field input:focus, .uid-input:focus {
+        .field input:focus {
             outline: none;
             border-color: #cc3333;
             box-shadow: 0 0 8px rgba(204,51,51,0.5);
             background: #222;
         }
-
-        /* حاويات UIDs ديناميكية */
         .uids-area {
             background: rgba(0,0,0,0.4);
             border-radius: 24px;
@@ -136,9 +123,16 @@
             flex: 1;
             min-width: 110px;
             background: #151515;
+            border: 1px solid #3a2a2a;
+            border-radius: 20px;
+            padding: 12px 18px;
+            color: white;
+            font-size: 1rem;
         }
-
-        /* شريط البحث والفلترة */
+        .uid-input:focus {
+            outline: none;
+            border-color: #cc3333;
+        }
         .search-bar {
             margin-bottom: 30px;
             display: flex;
@@ -160,8 +154,6 @@
             box-shadow: 0 0 10px rgba(204,68,68,0.3);
             outline: none;
         }
-
-        /* أزرار فلتر OB */
         .ob-filters {
             display: flex;
             flex-wrap: wrap;
@@ -189,8 +181,6 @@
             background: #2c2c2c;
             color: #ffaaaa;
         }
-
-        /* شبكة الإيموجيات */
         .emote-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -233,8 +223,6 @@
             color: #e0e0e0;
             margin-top: 4px;
         }
-
-        /* Pagination */
         .pagination {
             display: flex;
             justify-content: center;
@@ -255,8 +243,6 @@
             background: #b33;
             box-shadow: 0 0 6px red;
         }
-
-        /* Toast messages */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -277,8 +263,6 @@
         }
         .toast.success { border-left-color: #2e7d32; background: #1e2a1e; }
         .toast.error { border-left-color: #c62828; background: #2a1a1a; }
-
-        /* الفوتر */
         footer {
             text-align: center;
             margin-top: 40px;
@@ -290,9 +274,8 @@
         footer a {
             color: #dd5555;
             text-decoration: none;
+            cursor: pointer;
         }
-
-        /* سكرول بار احمرار */
         .emote-grid::-webkit-scrollbar {
             width: 6px;
         }
@@ -310,54 +293,46 @@
 <div class="container">
     <div class="header">
         <h1>𝕏𝕔𝕋𝕩𝕋𝕖𝕒𝕄 𝔼𝕖𝕄𝕠𝕋</h1>
-        <p>إضغط على أي إيموجي لإرساله مباشرة إلى فريقك 🔥</p>
+        <p>Click any emote to send it instantly to your squad</p>
     </div>
 
-    <!-- لوحة الإدخال -->
     <div class="input-card">
         <div class="field-group">
             <div class="field">
-                <label>🏷️ كود الفريق</label>
-                <input type="text" id="teamCode" placeholder="مثال: ABC123">
-            </div>
-            <div class="field">
-                <label>🔑 API Key</label>
-                <input type="text" id="apiKey" value="ziko" placeholder="api_key">
+                <label>🏷️ Team Code</label>
+                <input type="text" id="teamCode" placeholder="Example: ABC123">
             </div>
         </div>
 
         <div class="uids-area">
             <div class="uids-header">
-                <span>👥 معرفات اللاعبين (UID) - حتى 5</span>
-                <button class="add-uid-btn" id="addUidBtn">+ إضافة UID</button>
+                <span>👥 Player UIDs (max 5)</span>
+                <button class="add-uid-btn" id="addUidBtn">+ Add UID</button>
             </div>
             <div id="uidsContainer" class="uids-container">
                 <input type="text" class="uid-input" placeholder="UID 1">
             </div>
-            <div style="font-size: 12px; color:#a55; margin-top: 8px;">※ يمكن إضافة حتى 5 لاعبين</div>
+            <div style="font-size: 12px; color:#a55; margin-top: 8px;">※ You can add up to 5 players</div>
         </div>
     </div>
 
-    <!-- بحث وتصفية -->
     <div class="search-bar">
-        <input type="text" id="searchBox" placeholder="🔍 بحث بالاسم أو المعرف (مثل 909000045)">
+        <input type="text" id="searchBox" placeholder="🔍 Search by name or ID (e.g. 909000045)">
     </div>
     <div id="obFilterContainer" class="ob-filters"></div>
 
-    <!-- شبكة الإيموجيات -->
-    <div id="itemsGrid" class="emote-grid">جاري التحميل...</div>
+    <div id="itemsGrid" class="emote-grid">Loading...</div>
     <div class="pagination" id="pagination"></div>
 
     <footer>
-        XcTxTeaM EeMoT | <a href="https://t.me/ZikoB0SS" target="_blank">@ZikoB0SS</a>
+        dev by <a id="devLink">Zakaria</a>
     </footer>
 </div>
 
 <script>
-    // ================== التكوينات ==================
     const API_BASE = "https://xctxteam-bosses-production.up.railway.app";
     const API_DANCE = "/dance";
-    const API_KEY = "ziko";  // القيمة الافتراضية
+    const API_KEY = "ziko";
     const ITEM_DATA_URL = "https://raw.githubusercontent.com/4737647734/Emote/main/itemData.json";
     const FALLBACK_IMG = "https://via.placeholder.com/80/222222/FF5555?text=Emote";
 
@@ -366,8 +341,9 @@
     let currentPage = 1;
     const itemsPerPage = 30;
     let activeOB = null;
+    let lastClickTime = 0;
+    const THROTTLE_MS = 2000;
 
-    // ================== تحميل البيانات ==================
     async function fetchData() {
         try {
             const res = await fetch(ITEM_DATA_URL);
@@ -376,14 +352,13 @@
             filteredItems = [...allItems];
             renderItems();
             buildOBFilters();
-            showToast(`✅ تم تحميل ${allItems.length} إيموجي`, false);
+            showToast(`✅ Loaded ${allItems.length} emotes`, false);
         } catch (err) {
             console.error(err);
-            document.getElementById('itemsGrid').innerHTML = `<div style="text-align:center;padding:40px;">❌ فشل تحميل البيانات<br>${err.message}</div>`;
+            document.getElementById('itemsGrid').innerHTML = `<div style="text-align:center;padding:40px;">❌ Failed to load data<br>${err.message}</div>`;
         }
     }
 
-    // بناء أزرار التصفية حسب OB
     function buildOBFilters() {
         const versions = new Set();
         allItems.forEach(item => {
@@ -392,7 +367,7 @@
         });
         const sorted = [...versions].sort((a,b) => parseInt(b.slice(2)) - parseInt(a.slice(2)));
         const container = document.getElementById('obFilterContainer');
-        container.innerHTML = '<button class="ob-btn" data-ob="all">الكل</button>';
+        container.innerHTML = '<button class="ob-btn" data-ob="all">All</button>';
         sorted.forEach(ob => {
             const btn = document.createElement('button');
             btn.className = 'ob-btn';
@@ -427,7 +402,6 @@
         });
     }
 
-    // عرض العناصر مع البحث
     function renderItems() {
         const searchTerm = document.getElementById('searchBox').value.toLowerCase().trim();
         let data = filteredItems.filter(item => 
@@ -436,7 +410,7 @@
         );
         const grid = document.getElementById('itemsGrid');
         if (data.length === 0) {
-            grid.innerHTML = '<div style="text-align:center; padding:50px;">لا توجد نتائج</div>';
+            grid.innerHTML = '<div style="text-align:center; padding:50px;">No results found</div>';
             updatePagination(0);
             return;
         }
@@ -479,7 +453,6 @@
         }
     }
 
-    // Toast
     function showToast(msg, isError = false) {
         const toast = document.createElement('div');
         toast.className = `toast ${isError ? 'error' : 'success'}`;
@@ -492,7 +465,6 @@
         }, 3000);
     }
 
-    // التحقق من عدد الـ UIDs
     function getUIDs() {
         const inputs = document.querySelectorAll('.uid-input');
         const uids = [];
@@ -501,54 +473,56 @@
             if (val && /^\d+$/.test(val)) uids.push(val);
         }
         if (uids.length > 5) {
-            showToast('⚠️ الحد الأقصى 5 لاعبين فقط', true);
+            showToast('⚠️ Maximum 5 players allowed', true);
             return null;
         }
         if (uids.length === 0) {
-            showToast('❌ يجب إدخال UID واحد على الأقل', true);
+            showToast('❌ Please add at least one UID', true);
             return null;
         }
         return uids;
     }
 
-    // إرسال الإيموجي عبر API الجديد
+    let isThrottled = false;
     async function sendEmote(item) {
+        if (isThrottled) {
+            showToast('⏳ Please wait 2 seconds before sending another emote', true);
+            return;
+        }
         const teamCode = document.getElementById('teamCode').value.trim();
-        let apiKey = document.getElementById('apiKey').value.trim();
-        if (!apiKey) apiKey = "ziko";
         if (!teamCode) {
-            showToast('❌ أدخل كود الفريق', true);
+            showToast('❌ Enter team code', true);
             return;
         }
         const uidsArray = getUIDs();
         if (!uidsArray) return;
 
-        // تحويل قائمة الـ UIDs إلى سلسلة مفصولة بفواصل كما يطلب API
         const uidsParam = uidsArray.join(',');
-
-        const url = `${API_BASE}${API_DANCE}?emote_id=${item.Id}&team_code=${encodeURIComponent(teamCode)}&uids=${encodeURIComponent(uidsParam)}&api_key=${apiKey}`;
+        const url = `${API_BASE}${API_DANCE}?emote_id=${item.Id}&team_code=${encodeURIComponent(teamCode)}&uids=${encodeURIComponent(uidsParam)}&api_key=${API_KEY}`;
         
-        showToast(`⏳ جاري إرسال ${item.name} ...`, false);
+        isThrottled = true;
+        setTimeout(() => { isThrottled = false; }, THROTTLE_MS);
+
+        showToast(`⏳ Sending ${item.name} ...`, false);
         try {
             const response = await fetch(url, { method: 'GET' });
             const data = await response.json();
             if (data.success) {
                 showToast(`✅ ${data.message}`, false);
             } else {
-                showToast(`❌ فشل: ${data.message || "خطأ غير معروف"}`, true);
+                showToast(`❌ Failed: ${data.message || "Unknown error"}`, true);
             }
         } catch (err) {
             console.error(err);
-            showToast(`❌ خطأ في الاتصال: ${err.message}`, true);
+            showToast(`❌ Connection error: ${err.message}`, true);
         }
     }
 
-    // إضافة حقل UID جديد (بحد أقصى 5)
     document.getElementById('addUidBtn').onclick = () => {
         const container = document.getElementById('uidsContainer');
         const currentCount = document.querySelectorAll('.uid-input').length;
         if (currentCount >= 5) {
-            showToast('⚠️ يمكن إضافة حتى 5 لاعبين فقط', true);
+            showToast('⚠️ Maximum 5 players only', true);
             return;
         }
         const newInput = document.createElement('input');
@@ -558,7 +532,6 @@
         container.appendChild(newInput);
     };
 
-    // بحث فوري
     let searchTimeout;
     document.getElementById('searchBox').addEventListener('input', () => {
         clearTimeout(searchTimeout);
@@ -568,7 +541,10 @@
         }, 300);
     });
 
-    // تحميل أولي
+    document.getElementById('devLink').onclick = () => {
+        window.open('https://t.me/ZikoB0SS', '_blank');
+    };
+
     fetchData();
 </script>
 </body>
